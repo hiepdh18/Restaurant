@@ -3,20 +3,27 @@ package com.example.restaurant;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.restaurant.FragmentApp.DisplayDiskFragment;
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    FragmentManager fragmentManager;
+
 
 
     @SuppressLint("RestrictedApi")
@@ -48,8 +55,27 @@ public class HomeActivity extends AppCompatActivity {
         };
         drawerToggle.syncState();
 
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
+        fragmentManager = getSupportFragmentManager();
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id =  item.getItemId();
+        switch (id){
+            case R.id.iHome:
+                FragmentTransaction tranDisk = fragmentManager.beginTransaction();
+                DisplayDiskFragment displayDiskFragment = new DisplayDiskFragment();
+                tranDisk.replace(R.id.content,displayDiskFragment);
+                tranDisk.commit();
+                break;
+        }
+        return false;
     }
 }
