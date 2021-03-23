@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyOrderFoodApp</string>
+    <string name="app_name">Restaurant</string>
     <string name="hint_username">Tên đăng nhập</string>
     <string name="hint_passwd">Mật khẩu</string>
     <string name="male">Nam</string>
@@ -23,6 +23,10 @@
     <string name="close">Đóng</string>
     <string name="logout">Đăng xuất</string>
     <string name="exit">Hủy</string>
+    <string name="add_desk">Thêm bàn ăn</string>
+    <string name="desk_name">Tên bàn </string>
+    <string name="confirm">Đồng ý</string>
+
 
 
 </resources>

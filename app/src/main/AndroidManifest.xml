@@ -25,6 +25,11 @@
         <activity
             android:name=".HomeActivity">
         </activity>
+        <activity
+            android:theme="@style/PopUpTheme"
+            android:name=".AddDeskActivity">
+
+        </activity>
     </application>
 
 </manifest>
