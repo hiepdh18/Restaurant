@@ -15,7 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.restaurant.FragmentApp.DisplayDiskFragment;
+import com.example.restaurant.FragmentApp.DisplayDeskFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,8 +23,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar;
     FragmentManager fragmentManager;
-
-
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -39,7 +37,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
 //        actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar,R.string.open, R.string.close){
@@ -58,22 +55,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         fragmentManager = getSupportFragmentManager();
-
+        FragmentTransaction tranDisk = fragmentManager.beginTransaction();
+        DisplayDeskFragment displayDeskFragment = new DisplayDeskFragment();
+        tranDisk.replace(R.id.content, displayDeskFragment);
+        tranDisk.commit();
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id =  item.getItemId();
         switch (id){
             case R.id.iHome:
                 FragmentTransaction tranDisk = fragmentManager.beginTransaction();
-                DisplayDiskFragment displayDiskFragment = new DisplayDiskFragment();
-                tranDisk.replace(R.id.content,displayDiskFragment);
+                DisplayDeskFragment displayDeskFragment = new DisplayDeskFragment();
+                tranDisk.replace(R.id.content, displayDeskFragment);
                 tranDisk.commit();
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
                 break;
         }
         return false;

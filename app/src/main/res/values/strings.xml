@@ -23,6 +23,7 @@
     <string name="close">Đóng</string>
     <string name="logout">Đăng xuất</string>
     <string name="exit">Hủy</string>
+    <string name="add_desk">Thêm bàn ăn</string>
 
 
 </resources>
