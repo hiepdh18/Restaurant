@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/txtDeskName"
+        android:textSize="@dimen/size20sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/txtDeskName"
+        android:id="@+id/imgDesk"
+        android:src="@drawable/banan"
+        android:layout_width="120dp"
+        android:layout_height="120dp">
+
+    </ImageView>
+    <ImageView
+
+        android:layout_below="@+id/imgDesk"
+        android:id="@+id/imgOrder"
+        android:src="@drawable/order"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content">
+
+    </ImageView>
+    <ImageView
+
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/imgOrder"
+        android:layout_below="@+id/imgDesk"
+        android:id="@+id/imgPay"
+        android:src="@drawable/pay"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content">
+
+    </ImageView>
+    <ImageView
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/imgPay"
+        android:layout_below="@+id/imgDesk"
+        android:id="@+id/imgRemove"
+        android:src="@drawable/remove"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content">
+
+    </ImageView>
+
+</RelativeLayout>

@@ -4,4 +4,7 @@
         <item name="colorPrimary">@color/lightgray</item>
 
     </style>
+    <style name="PopUpTheme" parent="Theme.AppCompat.Dialog">
+
+    </style>
 </resources>
