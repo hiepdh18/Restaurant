@@ -29,18 +29,17 @@ public class DisplayDeskFragment extends Fragment {
     GridView gvDisplayDesk;
     List<DeskDTO> listDesk;
     DeskDAO deskDAO;
+    AdapterDisplayDesk adapterDisplayDesk;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.layout_display_desk,container,false);
+
         gvDisplayDesk = view.findViewById(R.id.gvDisplayDesk);
         deskDAO = new DeskDAO(getActivity());
-        listDesk = deskDAO.getAllDesk();
-        AdapterDisplayDesk adapterDisplayDesk = new AdapterDisplayDesk(getActivity(), R.layout.custom_layout_display_desk, listDesk);
-        gvDisplayDesk.setAdapter(adapterDisplayDesk);
-        adapterDisplayDesk.notifyDataSetChanged();
+        loadDesk();
 
         return view;
     }
@@ -64,6 +63,12 @@ public class DisplayDeskFragment extends Fragment {
         }
         return true;
     }
+    private void loadDesk(){
+        listDesk = deskDAO.getAllDesk();
+        adapterDisplayDesk = new AdapterDisplayDesk(getActivity(), R.layout.custom_layout_display_desk, listDesk);
+        gvDisplayDesk.setAdapter(adapterDisplayDesk);
+        gvDisplayDesk.deferNotifyDataSetChanged();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -73,6 +78,7 @@ public class DisplayDeskFragment extends Fragment {
             if(resultCode == Activity.RESULT_OK){
                 boolean check = data.getBooleanExtra("result",false);
                 if(check) {
+                    loadDesk();
                     Toast.makeText(getActivity(),"Them thanh cong",Toast.LENGTH_SHORT).show();
                 }
                 else {

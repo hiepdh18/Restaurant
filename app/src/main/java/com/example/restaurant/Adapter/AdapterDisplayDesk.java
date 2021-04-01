@@ -13,7 +13,7 @@ import com.example.restaurant.R;
 
 import java.util.List;
 
-public class AdapterDisplayDesk  extends BaseAdapter {
+public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickListener {
     Context context;
     int layout;
     List<DeskDTO> listDesk;
@@ -23,6 +23,7 @@ public class AdapterDisplayDesk  extends BaseAdapter {
         this.context = context;
         this.layout = layout;
         this.listDesk = listDesk;
+
     }
     @Override
     public int getCount() {
@@ -58,9 +59,25 @@ public class AdapterDisplayDesk  extends BaseAdapter {
         }
         DeskDTO desk = listDesk.get(position);
         viewHolder.txtDeskName.setText(desk.getName());
+        viewHolder.imgdesk.setOnClickListener(this);
 
         return view;
     }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        viewHolder = (ViewHolder) ((View)v.getParent()).getTag();
+        switch (id) {
+            case R.id.imgDesk:
+                viewHolder.imgOrder.setVisibility(View.VISIBLE);
+                viewHolder.imgPay.setVisibility(View.VISIBLE);
+                viewHolder.imgRemove.setVisibility(View.VISIBLE);
+                break;
+        }
+
+    }
+
     public class ViewHolder {
         TextView txtDeskName;
         ImageView imgdesk,imgOrder, imgPay, imgRemove;

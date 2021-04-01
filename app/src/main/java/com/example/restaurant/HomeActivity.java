@@ -20,8 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
-    NavigationView navigationView;
     Toolbar toolbar;
+    NavigationView navigationView;
     FragmentManager fragmentManager;
 
     @SuppressLint("RestrictedApi")
@@ -31,32 +31,30 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.layout_home);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_home);
         toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.navigation_home);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//        actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(toolbar); // set action bar
+//        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar,R.string.open, R.string.close){
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
             }
-
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
             }
         };
         drawerToggle.syncState();
-
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
+
+        // fragment to replace content
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction tranDisk = fragmentManager.beginTransaction();
         DisplayDeskFragment displayDeskFragment = new DisplayDeskFragment();
@@ -68,12 +66,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id =  item.getItemId();
         switch (id){
             case R.id.iHome:
+                // fragment to replace content
                 FragmentTransaction tranDisk = fragmentManager.beginTransaction();
                 DisplayDeskFragment displayDeskFragment = new DisplayDeskFragment();
                 tranDisk.replace(R.id.content, displayDeskFragment);
                 tranDisk.commit();
+
                 item.setChecked(true);
-                drawerLayout.closeDrawers();
+                drawerLayout.closeDrawers(); // escape from drawer layout
+                break;
+            case R.id.iMenu:
+
+                item.setChecked(true);
                 break;
         }
         return false;

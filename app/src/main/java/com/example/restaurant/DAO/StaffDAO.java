@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.service.autofill.RegexValidator;
 
 import com.example.restaurant.DTO.StaffDTO;
 import com.example.restaurant.Database.CreateDatabase;
@@ -26,7 +27,6 @@ public class StaffDAO {
         contentValues.put(CreateDatabase.TB_STAFF_IDEN, stuff.getIden());
 
         long check = database.insert(CreateDatabase.TB_STAFF, null, contentValues);
-        System.out.println(check);
         return check;
 
     }
