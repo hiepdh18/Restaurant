@@ -65,15 +65,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id =  item.getItemId();
-        switch (id){
-            case R.id.iHome:
+
+        switch (item.getItemId()){
+            case R.id.item_home:
                 FragmentTransaction tranDisk = fragmentManager.beginTransaction();
                 DisplayDeskFragment displayDeskFragment = new DisplayDeskFragment();
                 tranDisk.replace(R.id.content, displayDeskFragment);
                 tranDisk.commit();
                 item.setChecked(true);
                 drawerLayout.closeDrawers();
+                break;
+            case R.id.item_menu:
+                break;
+            case R.id.item_staff:
+                break;
+            case R.id.item_analystics:
+                break;
+            case R.id.item_logout:
+                finish();
                 break;
         }
         return false;
