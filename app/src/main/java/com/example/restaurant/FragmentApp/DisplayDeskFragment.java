@@ -35,29 +35,31 @@ public class DisplayDeskFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_display_desk,container,false);
         setHasOptionsMenu(true);
-        gvDisplayDesk = view.findViewById(R.id.gvDisplayDesk);
+        gvDisplayDesk = view.findViewById(R.id.gv_display_desk);
         deskDAO = new DeskDAO(getActivity());
+
+        loadDesh();
+        return view;
+    }
+    private void loadDesh(){
         listDesk = deskDAO.getAllDesk();
-        AdapterDisplayDesk adapterDisplayDesk = new AdapterDisplayDesk(getActivity(), R.layout.custom_layout_display_desk, listDesk);
+        AdapterDisplayDesk adapterDisplayDesk = new AdapterDisplayDesk(getActivity(), R.layout.custom_layout_desk, listDesk);
         gvDisplayDesk.setAdapter(adapterDisplayDesk);
         adapterDisplayDesk.notifyDataSetChanged();
-
-        return view;
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem iAddDesk = menu.add(1,R.id.iAddDesk,1,R.string.add_desk);
-        iAddDesk.setIcon(R.drawable.thembanan);
-        iAddDesk.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        MenuItem itemAddDesk = menu.add(1,R.id.item_add_desk,1,R.string.add_desk);
+        itemAddDesk.setIcon(R.drawable.thembanan);
+        itemAddDesk.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.iAddDesk:
+        switch ( item.getItemId()){
+            case R.id.item_add_desk:
                 Intent intent= new Intent(getActivity(), AddDeskActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ADD);
                 break;
@@ -73,10 +75,11 @@ public class DisplayDeskFragment extends Fragment {
             if(resultCode == Activity.RESULT_OK){
                 boolean check = data.getBooleanExtra("result",false);
                 if(check) {
-                    Toast.makeText(getActivity(),"Them thanh cong",Toast.LENGTH_SHORT).show();
+                    loadDesh();
+                    Toast.makeText(getActivity(),R.string.success,Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getActivity(),"Them that bai",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),R.string.failed,Toast.LENGTH_SHORT).show();
                 }
             }
         }

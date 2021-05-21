@@ -2,14 +2,23 @@ package com.example.restaurant.DTO;
 
 public class DeskDTO {
     int id;
-    String  name,status;
+    String  name;
+    boolean selected;
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public DeskDTO() {
     }
 
-    public DeskDTO(String name) {
+    public DeskDTO(String name, boolean selected) {
         this.name = name;
-        this.status = "false";
+        this.selected = selected;
     }
 
     public int getId() {
@@ -28,11 +37,4 @@ public class DeskDTO {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

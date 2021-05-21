@@ -30,7 +30,6 @@
         android:background="@color/lightblue"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/layout_nav_header"
         app:menu="@menu/menu_navigation">
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

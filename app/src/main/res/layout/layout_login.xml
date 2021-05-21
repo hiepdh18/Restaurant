@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/edUsername"
+            android:id="@+id/ed_username_login"
             android:hint="@string/hint_username"
             android:layout_width="match_parent"
             android:padding="@dimen/size10dp"
@@ -45,7 +45,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/edPassword"
+            android:id="@+id/ed_password_login"
             android:hint="@string/hint_passwd"
             android:layout_width="match_parent"
             android:padding="@dimen/size10dp"
@@ -60,7 +60,7 @@
         </EditText>
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:text="@string/login"
             android:layout_marginTop="@dimen/size20dp"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content">
         </Button>
         <Button
-            android:id="@+id/btnRegist"
+            android:id="@+id/btn_regist"
             android:layout_width="match_parent"
             android:backgroundTint="@color/green4"
 

@@ -24,23 +24,20 @@ public class AddDeskActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.layout_add_desk);
 
         edDeskName = findViewById(R.id.ed_desk_name);
-        btnOK = findViewById(R.id.btn_ok);
+        btnOK = findViewById(R.id.btn_ok_add_desk);
         deskDAO = new DeskDAO(this);
         btnOK.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.btn_ok:
+        switch (v.getId()){
+            case R.id.btn_ok_add_desk:
                 String deskName = edDeskName.getText().toString();
                 if(deskName == null || deskName.equals("")){
 
-
                 } else {
-
-                    boolean check = deskDAO.AddDesk(new DeskDTO(deskName));
+                    boolean check = deskDAO.AddDesk(deskName);
                     Intent intent = new Intent();
                     intent.putExtra("result", check);
                     setResult(Activity.RESULT_OK, intent);

@@ -25,15 +25,13 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_regist);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.hide();
-        editTextUsername = findViewById(R.id.username);
-        editTextPasswd = findViewById(R.id.passwd);
-        radioGroupSex = findViewById(R.id.sex);
-        editTextDateOfBirth =findViewById(R.id.dateOfBirth);
-        editTextIdentification =findViewById(R.id.identification);
-        btnSubmit = findViewById(R.id.bntSubmit);
-        btnCancel = findViewById(R.id.btnCancel);
+        editTextUsername = findViewById(R.id.ed_username_regist);
+        editTextPasswd = findViewById(R.id.ed_passwd_regist);
+        radioGroupSex = findViewById(R.id.sex_regist);
+        editTextDateOfBirth =findViewById(R.id.ed_date_of_birth_regist);
+        editTextIdentification =findViewById(R.id.ed_identification_regist);
+        btnSubmit = findViewById(R.id.bnt_submit_regist);
+        btnCancel = findViewById(R.id.btn_cancel_regist);
 
         btnSubmit.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
@@ -45,9 +43,8 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.bntSubmit:
+        switch (v.getId()){
+            case R.id.bnt_submit_regist:
                 String strUsername = editTextUsername.getText().toString();
                 String strPasswd = editTextPasswd.getText().toString();
                 String strSex="";
@@ -73,10 +70,8 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                         Toast.makeText(this, R.string.failed, Toast.LENGTH_SHORT).show();
                     }
                 }
-
-
                 break;
-            case R.id.btnCancel:
+            case R.id.btn_cancel_regist:l:
                 finish();
                 break;
         }
@@ -84,9 +79,8 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        int id = v.getId();
-        switch (id){
-            case R.id.dateOfBirth:
+        switch (v.getId()){
+            case R.id.ed_date_of_birth_regist:
                 if(hasFocus){
                     DatePickerFragment datePickerFragment = new DatePickerFragment();
                     datePickerFragment.show(getSupportFragmentManager(),"Date of birth");

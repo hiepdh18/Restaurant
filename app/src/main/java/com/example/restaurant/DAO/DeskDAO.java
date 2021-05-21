@@ -18,12 +18,12 @@ public class DeskDAO {
         database = createDatabase.open();
     }
 
-    public boolean AddDesk(DeskDTO desk){
+    public boolean AddDesk(String name){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CreateDatabase.TB_TABLE_NAME,desk.getName());
-        contentValues.put(CreateDatabase.TB_TABLE_STATUS,desk.getStatus());
+        contentValues.put(CreateDatabase.TB_TABLE_NAME,name);
+        contentValues.put(CreateDatabase.TB_TABLE_STATUS,"false");
         long check = database.insert(CreateDatabase.TB_TABLE,null, contentValues);
-        if(check!=0) {
+        if(check>0) {
             return true;
         }
         else {
@@ -39,7 +39,7 @@ public class DeskDAO {
             DeskDTO desk = new DeskDTO();
             desk.setId(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_TABLE_ID)));
             desk.setName(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_TABLE_NAME)));
-            desk.setStatus(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_TABLE_STATUS)));
+//            desk.setSelected(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_TABLE_STATUS)));
             listDesk.add(desk);
             cursor.moveToNext();
         }

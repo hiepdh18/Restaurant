@@ -7,62 +7,107 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
+
+import com.example.restaurant.DAO.DeskDAO;
 import com.example.restaurant.DTO.DeskDTO;
+import com.example.restaurant.HomeActivity;
 import com.example.restaurant.R;
 
 import java.util.List;
 
-public class AdapterDisplayDesk  extends BaseAdapter {
+public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickListener {
     Context context;
     int layout;
     List<DeskDTO> listDesk;
+
+    DeskDAO deskDAO;
     ViewHolder viewHolder;
+    FragmentManager fragmentManager;
 
     public AdapterDisplayDesk(Context context, int layout, List<DeskDTO> listDesk) {
         this.context = context;
         this.layout = layout;
         this.listDesk = listDesk;
+        deskDAO = new DeskDAO(context);
     }
     @Override
     public int getCount() {
         return listDesk.size();
     }
-
     @Override
     public Object getItem(int position) {
         return listDesk.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return listDesk.get(position).getId();
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if(view ==null){
-            LayoutInflater inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if(convertView == null){
+            LayoutInflater inflater =LayoutInflater.from(context);
             viewHolder = new ViewHolder();
-            view = inflater.inflate(R.layout.custom_layout_display_desk, parent, false);
-            viewHolder.txtDeskName = view.findViewById(R.id.txtDeskName);
-            viewHolder.imgdesk = view.findViewById(R.id.imgDesk);
-            viewHolder.imgOrder = view.findViewById(R.id.imgOrder);
-            viewHolder.imgPay = view.findViewById(R.id.imgPay);
-            viewHolder.imgRemove = view.findViewById(R.id.imgRemove);
-            view.setTag(viewHolder);
+            convertView = inflater.inflate(layout, parent, false);
+            viewHolder.txtDeskName = convertView.findViewById(R.id.txt_desk_name);
+            viewHolder.imgDesk = convertView.findViewById(R.id.img_desk);
+            viewHolder.imgOrder = convertView.findViewById(R.id.img_order);
+            viewHolder.imgPay = convertView.findViewById(R.id.img_pay);
+            viewHolder.imgRemove = convertView.findViewById(R.id.img_remove);
+            convertView.setTag(viewHolder);
         }
         else {
-            viewHolder = (ViewHolder) view.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        if(listDesk.get(position).isSelected()){
+            loadButton();
+        } else {
+            hideButton();
         }
         DeskDTO desk = listDesk.get(position);
         viewHolder.txtDeskName.setText(desk.getName());
+        viewHolder.imgDesk.setTag(position);
 
-        return view;
+        viewHolder.imgDesk.setOnClickListener(this);
+        viewHolder.imgOrder.setOnClickListener(this);
+        viewHolder.imgPay.setOnClickListener(this);
+        viewHolder.imgRemove.setOnClickListener(this);
+
+        return convertView;
     }
+
+    @Override
+    public void onClick(View view) {
+        viewHolder = (ViewHolder) ((View)view.getParent()).getTag();
+        int id = view.getId();
+        switch (id) {
+            case R.id.img_desk:
+//                String deskNAme = viewHolder.txtDeskName.getText().toString();
+                int pos =(int) view.getTag();
+                Toast.makeText(context,"vi tri " +pos,Toast.LENGTH_SHORT).show();
+                listDesk.get(pos).setSelected(true);
+                loadButton();
+                break;
+        }
+    }
+    private void loadButton(){
+        viewHolder.imgOrder.setVisibility(View.VISIBLE);
+        viewHolder.imgPay.setVisibility(View.VISIBLE);
+        viewHolder.imgRemove.setVisibility(View.VISIBLE);
+    }
+    private void hideButton(){
+        viewHolder.imgOrder.setVisibility(View.INVISIBLE);
+        viewHolder.imgPay.setVisibility(View.INVISIBLE);
+        viewHolder.imgRemove.setVisibility(View.INVISIBLE);
+    }
+
+
     public class ViewHolder {
         TextView txtDeskName;
-        ImageView imgdesk,imgOrder, imgPay, imgRemove;
+        ImageView imgDesk,imgOrder, imgPay, imgRemove;
     }
+
+
 }

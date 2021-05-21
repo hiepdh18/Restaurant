@@ -24,8 +24,18 @@
     <string name="logout">Đăng xuất</string>
     <string name="exit">Hủy</string>
     <string name="add_desk">Thêm bàn ăn</string>
+    <string name="add_dish">Thêm món ăn</string>
     <string name="desk_name">Tên bàn </string>
     <string name="confirm">Đồng ý</string>
+    <string name="dish_name">Tên món ăn</string>
+    <string name="price">Giá tiền</string>
+    <string name="cat_name">Tên loại</string>
+    <string name="empty_warning">Không đước bỏ trống</string>
+
+
+
+
+
 
 
 

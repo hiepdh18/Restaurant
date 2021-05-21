@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.restaurant.FragmentApp.DisplayDeskFragment;
+import com.example.restaurant.FragmentApp.DisplayMenuFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +25,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar;
     FragmentManager fragmentManager;
+    TextView txtusername;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -31,20 +34,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.layout_home);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_home);
         toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.navigation_home);
+        View view = navigationView.inflateHeaderView(R.layout.layout_nav_header);
+        txtusername = view.findViewById(R.id.txt_username);
+        fragmentManager = getSupportFragmentManager();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar,R.string.open, R.string.close){
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
             }
-
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -57,7 +61,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
-        fragmentManager = getSupportFragmentManager();
+        txtusername.setText(username);
+
         FragmentTransaction tranDisk = fragmentManager.beginTransaction();
         DisplayDeskFragment displayDeskFragment = new DisplayDeskFragment();
         tranDisk.replace(R.id.content, displayDeskFragment);
@@ -76,6 +81,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawers();
                 break;
             case R.id.item_menu:
+                FragmentTransaction tranMenu = fragmentManager.beginTransaction();
+                DisplayMenuFragment displayMenuFragment = new DisplayMenuFragment();
+                tranMenu.replace(R.id.content, displayMenuFragment);
+                tranMenu.commit();
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
                 break;
             case R.id.item_staff:
                 break;

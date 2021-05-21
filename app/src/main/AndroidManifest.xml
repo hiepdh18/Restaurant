@@ -14,12 +14,15 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".RegistActivity">
+        </activity>
+        <activity
+            android:name=".AddDishActivity">
         </activity>
 
         <activity
@@ -28,6 +31,11 @@
         <activity
             android:theme="@style/PopUpTheme"
             android:name=".AddDeskActivity">
+
+        </activity>
+        <activity
+            android:theme="@style/PopUpTheme"
+            android:name=".AddCategoryActivity">
 
         </activity>
     </application>

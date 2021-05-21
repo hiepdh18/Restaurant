@@ -16,6 +16,7 @@
     </ImageView>
 
     <TextView
+        android:id="@+id/txt_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size10dp"
