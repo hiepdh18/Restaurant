@@ -38,6 +38,11 @@
             android:name=".AddCategoryActivity">
 
         </activity>
+        <activity
+            android:theme="@style/PopUpTheme"
+            android:name=".PutAmountActivity">
+
+        </activity>
     </application>
 
 </manifest>

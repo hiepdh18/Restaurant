@@ -2,6 +2,7 @@ package com.example.restaurant.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.restaurant.DTO.OrderDTO;
@@ -25,6 +26,17 @@ public class OrderDAO {
             return (int) check;
         } else
             return 0;
+    }
+    public long getOrderIdByDeskId(int deskId, String status){
+        long oderId = 0;
+        String query = "SELECT * FROM "+CreateDatabase.TB_ORDER+" WHERE "+CreateDatabase.TB_ORDER_TABLE+" = '"+deskId+"' AND "+CreateDatabase.TB_ORDER_STATUS+" = '"+status+"'";
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            oderId = cursor.getLong(cursor.getColumnIndex(CreateDatabase.TB_ORDER_ID));
+            cursor.moveToNext();
+        }
+        return oderId;
     }
 
 }

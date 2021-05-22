@@ -30,10 +30,12 @@ import java.util.List;
 
 public class DisplayMenuFragment extends Fragment {
     public static int REQUEST_CODE_ADD_DISH = 20001;
-    GridView gridView;
-    CategoryDAO categoryDAO;
-    List<CategoryDTO> listCategory;
-    FragmentManager fragmentManager;
+    private GridView gridView;
+    private CategoryDAO categoryDAO;
+    private List<CategoryDTO> listCategory;
+    private FragmentManager fragmentManager;
+    private int deskId;
+
 
     @Nullable
     @Override
@@ -43,13 +45,14 @@ public class DisplayMenuFragment extends Fragment {
         categoryDAO = new CategoryDAO(getActivity());
         gridView = view.findViewById(R.id.gv_display_category);
         fragmentManager = getActivity().getSupportFragmentManager();
-        loadCat();
-
         // lay ma ban cho goi mon
         if(getArguments()!= null){
-            int deskId = getArguments().getInt("desk_id");
-            Toast.makeText(getActivity(), ""+deskId, Toast.LENGTH_SHORT).show();
+            deskId = getArguments().getInt("desk_id");
         }
+
+        loadCat();
+
+
 
         return view;
     }
@@ -91,6 +94,7 @@ public class DisplayMenuFragment extends Fragment {
                 DisplayDishFragment displayDishFragment = new DisplayDishFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("cat_id", listCategory.get(i).getId());
+                bundle.putInt("desk_id", deskId);
                 bundle.putString("cat_name",listCategory.get(i).getName());
                 displayDishFragment.setArguments(bundle);
                 transaction.replace(R.id.content, displayDishFragment).addToBackStack("return");
