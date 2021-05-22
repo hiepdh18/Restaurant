@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,12 @@ public class DisplayMenuFragment extends Fragment {
         fragmentManager = getActivity().getSupportFragmentManager();
         loadCat();
 
+        // lay ma ban cho goi mon
+        if(getArguments()!= null){
+            int deskId = getArguments().getInt("desk_id");
+            Toast.makeText(getActivity(), ""+deskId, Toast.LENGTH_SHORT).show();
+        }
+
         return view;
     }
 
@@ -51,7 +58,7 @@ public class DisplayMenuFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull  Menu menu, @NonNull  MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         MenuItem itemAddDish = menu.add(1,R.id.item_add_dish,1,R.string.add_dish);
-        itemAddDish.setIcon(R.drawable.logout);
+        itemAddDish.setIcon(R.drawable.menu);
         itemAddDish.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 

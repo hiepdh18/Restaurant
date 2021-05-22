@@ -63,10 +63,11 @@ import com.example.restaurant.DAO.StaffDAO;
      private void login(){
          String username = edUsername.getText().toString();
          String passwd = edPassword.getText().toString();
-         boolean check = staffDAO.checkStuff(username, passwd);
-         if(check){
+         int stuffId = staffDAO.checkStuff(username, passwd);
+         if(stuffId != 0){
              Intent intentHome = new Intent(this, HomeActivity.class );
              intentHome.putExtra("username", edUsername.getText().toString());
+             intentHome.putExtra("staff_id", stuffId);
              startActivity(intentHome);
          }else
              Toast.makeText(this, R.string.failed, Toast.LENGTH_SHORT).show();

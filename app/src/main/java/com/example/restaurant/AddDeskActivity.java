@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +36,7 @@ public class AddDeskActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_ok_add_desk:
                 String deskName = edDeskName.getText().toString();
                 if(deskName == null || deskName.equals("")){
-
+                    Toast.makeText(this, R.string.empty_warning, Toast.LENGTH_SHORT).show();
                 } else {
                     boolean check = deskDAO.AddDesk(deskName);
                     Intent intent = new Intent();

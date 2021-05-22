@@ -17,7 +17,18 @@ public class DeskDAO {
         CreateDatabase createDatabase = new CreateDatabase(context);
         database = createDatabase.open();
     }
+    public String getStatusById(int deskId){
+        String status = "";
+        String query = "SELECT * FROM "+CreateDatabase.TB_TABLE+" WHERE "+CreateDatabase.TB_TABLE_ID+" ='"+deskId+"'";
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            status = cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_TABLE_STATUS));
+            cursor.moveToNext();
+        }
+        return status;
 
+    }
     public boolean AddDesk(String name){
         ContentValues contentValues = new ContentValues();
         contentValues.put(CreateDatabase.TB_TABLE_NAME,name);
@@ -44,5 +55,10 @@ public class DeskDAO {
             cursor.moveToNext();
         }
         return listDesk;
+    }
+    public void updateStatus(int deskId, String status){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CreateDatabase.TB_TABLE_STATUS,status);
+        database.update(CreateDatabase.TB_TABLE,contentValues, CreateDatabase.TB_TABLE_ID+ " = '"+deskId+"'",null );
     }
 }

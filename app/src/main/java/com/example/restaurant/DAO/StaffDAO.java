@@ -37,12 +37,16 @@ public class StaffDAO {
             return true;
         else return false;
     }
-    public boolean checkStuff(String u, String p){
+    public int checkStuff(String u, String p){
+        int staffId = 0;
         String query = " SELECT * FROM "+ CreateDatabase.TB_STAFF+" WHERE "+ CreateDatabase.TB_STAFF_USERNAME+" = '"+ u +"' AND " + CreateDatabase.TB_STAFF_PASSWD + " = '"+ p+"'";
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.getCount() !=0)
-            return true;
-        else return false;
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            staffId = cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_STAFF_ID));
+            cursor.moveToNext();
+        }
+        return staffId;
     }
 
 }

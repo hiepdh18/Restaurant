@@ -5,7 +5,7 @@
     <EditText
         android:id="@+id/ed_desk_name"
         android:layout_width="match_parent"
-        android:hint="@string/cat_name"
+        android:hint="@string/desk_name"
         android:layout_height="wrap_content">
 
     </EditText>

@@ -58,11 +58,9 @@ public class DisplayDeskFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch ( item.getItemId()){
-            case R.id.item_add_desk:
-                Intent intent= new Intent(getActivity(), AddDeskActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_ADD);
-                break;
+        if(item.getItemId() ==R.id.item_add_desk ){
+            Intent intent= new Intent(getActivity(), AddDeskActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_ADD);
         }
         return true;
     }
@@ -73,6 +71,7 @@ public class DisplayDeskFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_ADD){
             if(resultCode == Activity.RESULT_OK){
+                assert data != null;
                 boolean check = data.getBooleanExtra("result",false);
                 if(check) {
                     loadDesh();
