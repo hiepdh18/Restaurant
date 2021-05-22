@@ -27,6 +27,7 @@
     <color name="Azure1">#F0FFFF</color>
     <color name="SlateBlue1">#836FFF</color>
     <color name="LightCyan1">#E0FFFF</color>
+    <color name="LightCyan1tran">#80E0FFFF</color>
     <color name="PaleTurquoise3">#96CDCD</color>
     <color name="Aquamarine1">#7FFFD4</color>
     <color name="PaleGreen">#98FB98</color>

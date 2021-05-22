@@ -19,6 +19,18 @@ public class CategoryDAO {
         CreateDatabase createDatabase = new CreateDatabase(context);
         sqLiteDatabase = createDatabase.open();
     }
+
+    public String getImgById(int id){
+        String img = "";
+        String query = "SELECT * FROM "+ CreateDatabase.TB_DISH+" WHERE "+ CreateDatabase.TB_DISH_CAT+" = '"+id+"' AND "+CreateDatabase.TB_DISH_IMG+" != '' ORDER BY "+CreateDatabase.TB_DISH_ID+" LIMIT 1";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            img = cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_DISH_IMG));
+            cursor.moveToNext();
+        }
+        return img;
+    }
     public boolean addCatgory(CategoryDTO cat){
         ContentValues contentValues = new ContentValues();
         contentValues.put(CreateDatabase.TB_CATEGORY_NAME, cat.getName());

@@ -23,6 +23,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public final static String TB_DISH_ID = "ID";
     public final static String TB_DISH_NAME = "NAME";
     public final static String TB_DISH_CAT = "CATEGORY_ID";
+    public final static String TB_DISH_PRICE = "PRICE";
     public final static String TB_DISH_IMG = "IMAGE_URL";
 
 
@@ -66,8 +67,9 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 + TB_DISH_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_DISH_NAME+" TEXT, "
                 + TB_DISH_CAT +" INTEGER,"
+                + TB_DISH_PRICE + " INTEGER,"
                 + TB_DISH_IMG +" TEXT, FOREIGN KEY ("
-                + TB_DISH_CAT+") REFERENCES "+ TB_CATEGORY+"("+TB_CATEGORY_ID+")) ";
+                + TB_DISH_CAT+" ) REFERENCES "+ TB_CATEGORY+"("+TB_CATEGORY_ID+")) ";
         String tbORDER = "CREATE TABLE " + TB_ORDER +" ( "
                 + TB_ORDER_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_ORDER_TABLE+" INTEGER, "

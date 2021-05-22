@@ -47,6 +47,7 @@ public class AddCategoryActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(AddCategoryActivity.this, R.string.empty_warning, Toast.LENGTH_SHORT).show();
                 }
+                finish();
 
             }
         });

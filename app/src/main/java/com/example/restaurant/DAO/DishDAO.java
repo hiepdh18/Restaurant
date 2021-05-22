@@ -24,9 +24,11 @@ public class DishDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(CreateDatabase.TB_DISH_NAME, dish.getName());
         contentValues.put(CreateDatabase.TB_DISH_CAT, dish.getCategory());
+        contentValues.put(CreateDatabase.TB_DISH_PRICE, dish.getPrice());
         contentValues.put(CreateDatabase.TB_DISH_IMG, dish.getImageUrl());
         long check = sqLiteDatabase.insert(CreateDatabase.TB_DISH,null, contentValues);
-        if(check>0) return true;
+        if(check>0)
+            return true;
         return false;
     }
     public List<DishDTO> getAllDish(){
@@ -45,6 +47,25 @@ public class DishDAO {
         }
         return listDish;
     }
+
+    public List<DishDTO> getDishByCat(int catId){
+        List<DishDTO> listDish = new ArrayList<DishDTO>();
+        String sql = "SELECT  * from "+ CreateDatabase.TB_DISH + " WHERE "+  CreateDatabase.TB_DISH_CAT+ " = '"+catId+"' ";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            DishDTO dish = new DishDTO();
+            dish.setId(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_DISH_ID)));
+            dish.setName(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_DISH_NAME)));
+            dish.setCategory(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_DISH_CAT)));
+            dish.setPrice(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_DISH_PRICE)));
+            dish.setImageUrl(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_DISH_IMG)));
+            listDish.add(dish);
+            cursor.moveToNext();
+        }
+        return listDish;
+    }
+
     public DishDTO getDishById(int id){
         String query = "SELECT * FROM "+ CreateDatabase.TB_DISH + " WHERE "+ CreateDatabase.TB_DISH_ID +" = " +id;
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);

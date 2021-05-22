@@ -1,8 +1,17 @@
 package com.example.restaurant.DTO;
 
 public class DishDTO {
-    private int id, category;
+    private int id, category, price;
     private String name, imageUrl;
+
+    public DishDTO() {
+    }
+    public DishDTO(String name, int price, int category, String imageUrl) {
+        this.category = category;
+        this.price = price;
+        this.name = name;
+        this.imageUrl = imageUrl;
+    }
 
     public int getId() {
         return id;
@@ -36,13 +45,11 @@ public class DishDTO {
         this.imageUrl = imageUrl;
     }
 
-    public DishDTO(int id, int category, String name, String imageUrl) {
-        this.id = id;
-        this.category = category;
-        this.name = name;
-        this.imageUrl = imageUrl;
+    public int getPrice() {
+        return price;
     }
 
-    public DishDTO() {
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

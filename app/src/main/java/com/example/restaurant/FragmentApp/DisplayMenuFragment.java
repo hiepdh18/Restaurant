@@ -9,11 +9,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.restaurant.Adapter.AdapterDisplayMenu;
 import com.example.restaurant.AddDishActivity;
@@ -29,18 +32,17 @@ public class DisplayMenuFragment extends Fragment {
     GridView gridView;
     CategoryDAO categoryDAO;
     List<CategoryDTO> listCategory;
+    FragmentManager fragmentManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable  Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_display_dish,container, false);
+        View view = inflater.inflate(R.layout.layout_display_catgory,container, false);
         setHasOptionsMenu(true);
         categoryDAO = new CategoryDAO(getActivity());
         gridView = view.findViewById(R.id.gv_display_category);
-        listCategory = categoryDAO.getAllCategory();
-        AdapterDisplayMenu adapterDisplayMenu = new AdapterDisplayMenu(getActivity(),R.layout.layout_display_catgory, listCategory);
-//        gridView.setAdapter(adapterDisplayMenu);
-//        adapterDisplayMenu.notifyDataSetChanged();
+        fragmentManager = getActivity().getSupportFragmentManager();
+        loadCat();
 
         return view;
     }
@@ -66,7 +68,27 @@ public class DisplayMenuFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_ADD_DISH  && resultCode == Activity.RESULT_OK){
-
+            loadCat();
         }
+    }
+
+    private  void loadCat(){
+        listCategory = categoryDAO.getAllCategory();
+        AdapterDisplayMenu adapterDisplayMenu = new AdapterDisplayMenu(getActivity(),R.layout.custom_layout_catgory, listCategory);
+        gridView.setAdapter(adapterDisplayMenu);
+        adapterDisplayMenu.notifyDataSetChanged();
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                DisplayDishFragment displayDishFragment = new DisplayDishFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("cat_id", listCategory.get(i).getId());
+                bundle.putString("cat_name",listCategory.get(i).getName());
+                displayDishFragment.setArguments(bundle);
+                transaction.replace(R.id.content, displayDishFragment).addToBackStack("return");
+                transaction.commit();
+            }
+        });
     }
 }

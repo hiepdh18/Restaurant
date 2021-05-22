@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restaurant.Adapter.AdapterDisplayCatSpin;
 import com.example.restaurant.DAO.CategoryDAO;
+import com.example.restaurant.DAO.DishDAO;
 import com.example.restaurant.DTO.CategoryDTO;
+import com.example.restaurant.DTO.DishDTO;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class AddDishActivity extends AppCompatActivity implements View.OnClickLi
     String imgUrl;
     List<CategoryDTO> listCat;
     CategoryDAO categoryDAO;
+    DishDAO dishDAO;
     AdapterDisplayCatSpin adapterDisplayCatSpin;
 
     @Override
@@ -37,6 +40,7 @@ public class AddDishActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_add_dish);
         categoryDAO = new CategoryDAO(this);
+        dishDAO = new DishDAO(this);
 
         editTextDishName = findViewById(R.id.ed_dish_name);
         editTextPrice = findViewById(R.id.ed_price);
@@ -76,16 +80,28 @@ public class AddDishActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.btn_ok_add_dish:
                 int pos = spinCat.getSelectedItemPosition();
+                int catID = listCat.get(pos).getId();
                 String dishName = editTextDishName.getText().toString();
-                String price = editTextPrice.getText().toString();
-
-
-                Intent intent1 = new Intent();
-                setResult(Activity.RESULT_OK,intent1);
+                String p = editTextPrice.getText().toString();
+                if(!dishName.equals("") && !p.equals("")){
+                    int price = Integer.parseInt(p);
+                    DishDTO dish = new DishDTO(dishName, price,catID ,imgUrl);
+                    boolean check = dishDAO.addDish(dish);
+                    if(check){
+                        Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent();
+                        setResult(Activity.RESULT_OK,intent1);
+                        finish();
+                    }
+                    else
+                        Toast.makeText(this, R.string.failed, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, R.string.empty_warning, Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btn_cancel_add_dish:
+                setResult(Activity.RESULT_OK);
                 finish();
-
                 break;
         }
     }
