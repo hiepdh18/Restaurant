@@ -37,7 +37,6 @@ public class DisplayDeskFragment extends Fragment {
         setHasOptionsMenu(true);
         gvDisplayDesk = view.findViewById(R.id.gv_display_desk);
         deskDAO = new DeskDAO(getActivity());
-
         loadDesh();
         return view;
     }

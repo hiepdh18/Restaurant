@@ -148,10 +148,13 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
 
                 break;
             case R.id.img_pay:
-
-                Intent intent = new Intent(context, PayActivity.class);
-                intent.putExtra("desk_id", deskId);
-                context.startActivity(intent);
+                if(deskDAO.getStatusById(deskId).equals("true")){
+                    Intent intent = new Intent(context, PayActivity.class);
+                    intent.putExtra("desk_id", deskId);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context, "Bàn chưa gọi món!", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.img_remove:
                 break;

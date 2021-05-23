@@ -38,5 +38,11 @@ public class OrderDAO {
         }
         return oderId;
     }
+    public boolean updateOrderStatusByDesk(int deskId, String status){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CreateDatabase.TB_ORDER_STATUS, status);
+        database.update(CreateDatabase.TB_ORDER, contentValues,CreateDatabase.TB_ORDER_TABLE+ " = "+ deskId,null);
+        return true;
+    }
 
 }
