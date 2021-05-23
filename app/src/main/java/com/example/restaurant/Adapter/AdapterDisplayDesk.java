@@ -111,19 +111,14 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
         int id = view.getId();
         switch (id) {
             case R.id.img_desk:
-//                String deskNAme = viewHolder.txtDeskName.getText().toString();
                 int pos =(int) view.getTag();
-                Toast.makeText(context,"vi tri " +pos,Toast.LENGTH_SHORT).show();
                 listDesk.get(pos).setSelected(true);
                 loadButton();
                 break;
             case R.id.img_order:
-
                 HomeActivity activity = (HomeActivity)context;
                 Intent intentHome = activity.getIntent();
                 int staffId = intentHome.getIntExtra("staff_id",0);
-
-
                 String status = deskDAO.getStatusById(deskId);
                 if(status.equals("false")){
                     // them bang goi mon

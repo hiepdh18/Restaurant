@@ -44,8 +44,14 @@
 
         </activity>
         <activity
+            android:theme="@style/PopUpTheme"
+            android:name=".ModifyDeskAtivity">
+
+        </activity>
+        <activity
             android:name=".PayActivity">
         </activity>
+
     </application>
 
 </manifest>

@@ -3,12 +3,14 @@ package com.example.restaurant.FragmentApp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -20,12 +22,15 @@ import com.example.restaurant.Adapter.AdapterDisplayDesk;
 import com.example.restaurant.AddDeskActivity;
 import com.example.restaurant.DAO.DeskDAO;
 import com.example.restaurant.DTO.DeskDTO;
+import com.example.restaurant.ModifyDeskAtivity;
 import com.example.restaurant.R;
 
 import java.util.List;
 
 public class DisplayDeskFragment extends Fragment {
     public static int REQUEST_CODE_ADD = 1111;
+    public static int REQUEST_CODE_MODIFY = 1112;
+
     GridView gvDisplayDesk;
     List<DeskDTO> listDesk;
     DeskDAO deskDAO;
@@ -38,6 +43,7 @@ public class DisplayDeskFragment extends Fragment {
         gvDisplayDesk = view.findViewById(R.id.gv_display_desk);
         deskDAO = new DeskDAO(getActivity());
         loadDesh();
+        registerForContextMenu(gvDisplayDesk);
         return view;
     }
     private void loadDesh(){
@@ -65,6 +71,30 @@ public class DisplayDeskFragment extends Fragment {
     }
 
     @Override
+    public void onCreateContextMenu(@NonNull  ContextMenu menu, @NonNull View v, @Nullable  ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.menu_edit_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo  menuInfo = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int pos = menuInfo.position;
+        int deskId = listDesk.get(pos).getId();
+        if(item.getItemId()== R.id.menu_modify){
+
+            Intent intent = new Intent(getActivity(),ModifyDeskAtivity.class);
+            intent.putExtra("desk_id", deskId);
+            startActivityForResult(intent, REQUEST_CODE_MODIFY);
+        }
+        if(item.getItemId()== R.id.menu_delete){
+            boolean check =deskDAO.deleteDesk(deskId);
+            if(check) loadDesh();
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -79,6 +109,11 @@ public class DisplayDeskFragment extends Fragment {
                 else {
                     Toast.makeText(getActivity(),R.string.failed,Toast.LENGTH_SHORT).show();
                 }
+            }
+        }
+        if(requestCode == REQUEST_CODE_MODIFY){
+            if(resultCode == Activity.RESULT_OK){
+                loadDesh();
             }
         }
     }

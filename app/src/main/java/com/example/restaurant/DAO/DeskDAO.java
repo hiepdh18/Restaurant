@@ -29,6 +29,13 @@ public class DeskDAO {
         return status;
 
     }
+    public boolean deleteDesk(int id){
+        long check= database.delete(CreateDatabase.TB_TABLE,CreateDatabase.TB_TABLE_ID+" = "+id, null);
+        if(check>0){
+            return true;
+        }
+        return false;
+    }
     public boolean AddDesk(String name){
         ContentValues contentValues = new ContentValues();
         contentValues.put(CreateDatabase.TB_TABLE_NAME,name);
@@ -60,5 +67,10 @@ public class DeskDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(CreateDatabase.TB_TABLE_STATUS,status);
         database.update(CreateDatabase.TB_TABLE,contentValues, CreateDatabase.TB_TABLE_ID+ " = '"+deskId+"'",null );
+    }
+    public void modifyName(int id, String name){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CreateDatabase.TB_TABLE_NAME,name);
+        database.update(CreateDatabase.TB_TABLE,contentValues, CreateDatabase.TB_TABLE_ID+ " = '"+id+"'",null );
     }
 }
