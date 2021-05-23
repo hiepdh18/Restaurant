@@ -6,4 +6,7 @@
     <item android:id="@+id/item_add_dish"
         android:title="@string/add_dish">
     </item>
+    <item android:id="@+id/item_add_staff"
+        android:title="@string/add_staff">
+    </item>
 </menu>

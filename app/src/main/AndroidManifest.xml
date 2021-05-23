@@ -51,6 +51,9 @@
         <activity
             android:name=".PayActivity">
         </activity>
+        <activity
+            android:name=".ModifyStaffActivity">
+        </activity>
 
     </application>
 

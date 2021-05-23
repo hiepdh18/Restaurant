@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    <ImageView-->
+<!--        android:layout_marginLeft="20dp"-->
+
+<!--        android:id="@+id/avatar_custom"-->
+<!--        android:padding="5dp"-->
+<!--        android:scaleType=""-->
+<!--        android:src="@drawable/waiter256"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp">-->
+<!--    </ImageView>-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_custom"
+        android:layout_width="@dimen/size100dp"
+        android:layout_height="@dimen/size100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/waiter256"/>
+    <LinearLayout
+
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/staff_name_custome"
+            android:text="Hoten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_marginLeft="20dp"
+
+            android:id="@+id/sdt_custom"
+            android:text="sdt"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TextView>
+        <TextView
+            android:layout_marginLeft="20dp"
+
+            android:id="@+id/sex_custom"
+            android:text="gioi tinh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+    </LinearLayout>
+</LinearLayout>

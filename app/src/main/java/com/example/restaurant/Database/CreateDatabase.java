@@ -17,6 +17,9 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public final static String TB_STAFF_USERNAME = "USERNAME";
     public final static String TB_STAFF_PASSWD = "PASSWD";
     public final static String TB_STAFF_SEX = "SEX";
+    public final static String TB_STAFF_FULLNAME = "FULLNAME";
+    public final static String TB_STAFF_NUMBER = "NUMBER";
+    public final static String TB_STAFF_AVATAR = "AVATAR";
     public final static String TB_STAFF_BIRTH = "BIRTH";
     public final static String TB_STAFF_IDEN = "IDENTIFICATION";
 
@@ -53,8 +56,11 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 + TB_STAFF_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_STAFF_USERNAME+" TEXT, "
                 + TB_STAFF_PASSWD+" TEXT, "
+                + TB_STAFF_FULLNAME+" TEXT, "
                 + TB_STAFF_SEX +" TEXT, "
                 + TB_STAFF_BIRTH +" TEXT, "
+                + TB_STAFF_NUMBER+" TEXT, "
+                + TB_STAFF_AVATAR+" TEXT, "
                 + TB_STAFF_IDEN +" TEXT ) ";
         String tbCAT = "CREATE TABLE " + TB_CATEGORY +" ( "
                 + TB_CATEGORY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "

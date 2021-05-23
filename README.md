@@ -21,3 +21,20 @@
 5. Analys
     - view
 6. Setting
+
+# Structure
+    * Staff:
+        - id
+        - username
+        - password
+        - fullname
+        - sex
+        - iden
+        - number
+        - avatar
+    * Desk
+    * Dish
+    * Category
+    * Order
+    * OrderDetail
+    * Invoice
