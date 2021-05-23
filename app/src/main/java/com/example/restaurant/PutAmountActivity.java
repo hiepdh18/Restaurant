@@ -63,7 +63,7 @@ public class PutAmountActivity extends AppCompatActivity implements View.OnClick
                 if (checkAdd){
                     Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "HHHHHHHHHH", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.failed, Toast.LENGTH_SHORT).show();
                 }
             }
             finish();

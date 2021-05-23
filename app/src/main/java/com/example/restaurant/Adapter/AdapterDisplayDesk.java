@@ -22,6 +22,7 @@ import com.example.restaurant.DTO.OrderDTO;
 import com.example.restaurant.FragmentApp.DisplayMenuFragment;
 import com.example.restaurant.HomeActivity;
 import com.example.restaurant.LoginActivity;
+import com.example.restaurant.PayActivity;
 import com.example.restaurant.R;
 
 import java.text.SimpleDateFormat;
@@ -29,14 +30,14 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickListener {
-    Context context;
-    int layout;
-    List<DeskDTO> listDesk;
+    private Context context;
+    private int layout;
+    private List<DeskDTO> listDesk;
 
-    DeskDAO deskDAO;
-    ViewHolder viewHolder;
-    FragmentManager fragmentManager;
-    OrderDAO orderDAO;
+    private DeskDAO deskDAO;
+    private ViewHolder viewHolder;
+    private FragmentManager fragmentManager;
+    private OrderDAO orderDAO;
 
     public AdapterDisplayDesk(Context context, int layout, List<DeskDTO> listDesk) {
         this.context = context;
@@ -105,6 +106,8 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
     @Override
     public void onClick(View view) {
         viewHolder = (ViewHolder) ((View)view.getParent()).getTag();
+        int pos1 = (int)viewHolder.imgDesk.getTag();
+        int deskId = listDesk.get(pos1).getId();
         int id = view.getId();
         switch (id) {
             case R.id.img_desk:
@@ -115,8 +118,7 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
                 loadButton();
                 break;
             case R.id.img_order:
-                int pos1 = (int)viewHolder.imgDesk.getTag();
-                int deskId = listDesk.get(pos1).getId();
+
                 HomeActivity activity = (HomeActivity)context;
                 Intent intentHome = activity.getIntent();
                 int staffId = intentHome.getIntExtra("staff_id",0);
@@ -146,6 +148,10 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
 
                 break;
             case R.id.img_pay:
+
+                Intent intent = new Intent(context, PayActivity.class);
+                intent.putExtra("desk_id", deskId);
+                context.startActivity(intent);
                 break;
             case R.id.img_remove:
                 break;

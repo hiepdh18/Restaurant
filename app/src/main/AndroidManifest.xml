@@ -43,6 +43,9 @@
             android:name=".PutAmountActivity">
 
         </activity>
+        <activity
+            android:name=".PayActivity">
+        </activity>
     </application>
 
 </manifest>
