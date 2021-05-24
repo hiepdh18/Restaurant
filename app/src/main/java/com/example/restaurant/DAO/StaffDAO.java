@@ -19,12 +19,24 @@ public class StaffDAO {
         CreateDatabase createDatabase = new CreateDatabase( context);
         database = createDatabase.open();
     }
+    public int getRoleId(int staffId){
+        int roleId =0;
+        String q = "SELECT * FROM " +CreateDatabase.TB_STAFF +" WHERE "+CreateDatabase.TB_STAFF_ID + " = " + staffId;
+        Cursor  cursor = database.rawQuery(q,null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            roleId = cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_STAFF_ROLE_ID));
+            cursor.moveToNext();
+        }
+        return roleId;
+    }
     public long addStuff(StaffDTO stuff){
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(CreateDatabase.TB_STAFF_USERNAME, stuff.getUsername());
         contentValues.put(CreateDatabase.TB_STAFF_PASSWD, stuff.getPassword());
         contentValues.put(CreateDatabase.TB_STAFF_SEX, stuff.getSex());
+        contentValues.put(CreateDatabase.TB_STAFF_ROLE_ID,2);
         contentValues.put(CreateDatabase.TB_STAFF_BIRTH, stuff.getDateOfBirth());
         contentValues.put(CreateDatabase.TB_STAFF_IDEN, stuff.getIden());
 
@@ -49,7 +61,8 @@ public class StaffDAO {
             String number= cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_STAFF_NUMBER));
             String fullName = cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_STAFF_FULLNAME));
             String avatar = cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_STAFF_AVATAR));
-            staff = new StaffDTO(i,username,password, sex,dateOfBirth,iden,number,fullName,avatar);
+            int roleId = cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_STAFF_ROLE_ID));
+            staff = new StaffDTO(i,roleId,username,password, sex,dateOfBirth,iden,number,fullName,avatar);
             cursor.moveToNext();
         }
         return staff;
@@ -92,7 +105,11 @@ public class StaffDAO {
         return false;
     }
     public boolean deleteStaff(int id){
-        long check = database.delete(CreateDatabase.TB_STAFF,CreateDatabase.TB_STAFF_ID+" = "+id,null);
+        StaffDTO staff = getStaff(id);
+        long check =0;
+        if(staff.getRole()!=1){
+            check = database.delete(CreateDatabase.TB_STAFF,CreateDatabase.TB_STAFF_ID+" = "+id,null);
+        }
         if(check>0)
             return true;
         return false;

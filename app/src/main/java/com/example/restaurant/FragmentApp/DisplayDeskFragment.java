@@ -1,6 +1,7 @@
 package com.example.restaurant.FragmentApp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -22,6 +23,7 @@ import com.example.restaurant.Adapter.AdapterDisplayDesk;
 import com.example.restaurant.AddDeskActivity;
 import com.example.restaurant.DAO.DeskDAO;
 import com.example.restaurant.DTO.DeskDTO;
+import com.example.restaurant.HomeActivity;
 import com.example.restaurant.ModifyDeskAtivity;
 import com.example.restaurant.R;
 
@@ -34,12 +36,15 @@ public class DisplayDeskFragment extends Fragment {
     GridView gvDisplayDesk;
     List<DeskDTO> listDesk;
     DeskDAO deskDAO;
+    int roleId;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_display_desk,container,false);
         setHasOptionsMenu(true);
+        roleId = getActivity().getSharedPreferences("role", Context.MODE_PRIVATE).getInt("role_id",0);
+        ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Bàn ăn");
         gvDisplayDesk = view.findViewById(R.id.gv_display_desk);
         deskDAO = new DeskDAO(getActivity());
         loadDesh();
@@ -56,9 +61,11 @@ public class DisplayDeskFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem itemAddDesk = menu.add(1,R.id.item_add_desk,1,R.string.add_desk);
-        itemAddDesk.setIcon(R.drawable.thembanan);
-        itemAddDesk.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        if(roleId==1){
+            MenuItem itemAddDesk = menu.add(1,R.id.item_add_desk,1,R.string.add_desk);
+            itemAddDesk.setIcon(R.drawable.thembanan);
+            itemAddDesk.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
     }
 
     @Override
@@ -73,7 +80,8 @@ public class DisplayDeskFragment extends Fragment {
     @Override
     public void onCreateContextMenu(@NonNull  ContextMenu menu, @NonNull View v, @Nullable  ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getActivity().getMenuInflater().inflate(R.menu.menu_edit_context, menu);
+        if(roleId==1)
+            getActivity().getMenuInflater().inflate(R.menu.menu_edit_context, menu);
     }
 
     @Override

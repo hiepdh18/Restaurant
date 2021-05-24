@@ -1,5 +1,6 @@
 package com.example.restaurant.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class CreateDatabase extends SQLiteOpenHelper {
 
     public final static String TB_STAFF = "STAFF";
+    public final static String TB_ROLE = "ROLE";
     public final static String TB_DISH = "DISH";
     public final static String TB_CATEGORY = "CATEGORY";
     public final static String TB_TABLE = "DESK";
@@ -20,6 +22,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public final static String TB_STAFF_FULLNAME = "FULLNAME";
     public final static String TB_STAFF_NUMBER = "NUMBER";
     public final static String TB_STAFF_AVATAR = "AVATAR";
+    public final static String TB_STAFF_ROLE_ID = "ROLE_ID";
     public final static String TB_STAFF_BIRTH = "BIRTH";
     public final static String TB_STAFF_IDEN = "IDENTIFICATION";
 
@@ -37,6 +40,9 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public final static String TB_TABLE_NAME = "NAME";
     public final static String TB_TABLE_STATUS = "STATUS";
 
+    public final static String TB_ROLE_ID = "ID";
+    public final static String TB_ROLE_NAME = "NAME";
+
     public final static String TB_ORDER_ID = "ID";
     public final static String TB_ORDER_TABLE = "TABLE_ID";
     public final static String TB_ORDER_STAFF = "STAFF_ID";
@@ -52,6 +58,10 @@ public class CreateDatabase extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String tbROLE = "CREATE TABLE " + TB_ROLE +" ( "
+                + TB_ROLE_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TB_ROLE_NAME+" TEXT )";
+
         String tbSTAFF = "CREATE TABLE " + TB_STAFF +" ( "
                 + TB_STAFF_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_STAFF_USERNAME+" TEXT, "
@@ -61,10 +71,12 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 + TB_STAFF_BIRTH +" TEXT, "
                 + TB_STAFF_NUMBER+" TEXT, "
                 + TB_STAFF_AVATAR+" TEXT, "
+                + TB_STAFF_ROLE_ID+" INTEGER, "
                 + TB_STAFF_IDEN +" TEXT ) ";
         String tbCAT = "CREATE TABLE " + TB_CATEGORY +" ( "
                 + TB_CATEGORY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_CATEGORY_NAME+" TEXT )";
+
         String tbTABLE = "CREATE TABLE " + TB_TABLE +" ( "
                 + TB_TABLE_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_TABLE_NAME+" TEXT, "
@@ -91,11 +103,32 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "FOREIGN KEY ("+TB_ORDER_DETAIL_ORDER+") REFERENCES "+ TB_ORDER+"("+TB_ORDER_ID+")," +
                 "FOREIGN KEY ("+TB_ORDER_DETAIL_DISH+") REFERENCES "+ TB_DISH+"("+TB_DISH_ID+"))";
         db.execSQL(tbSTAFF);
+        db.execSQL(tbROLE);
+
         db.execSQL(tbCAT);
         db.execSQL(tbTABLE);
         db.execSQL(tbDISH);
         db.execSQL(tbORDER);
         db.execSQL(tbORDER_DETAIL);
+
+        ContentValues cv2 = new ContentValues();
+        cv2.put(CreateDatabase.TB_ROLE_NAME,"Admin");
+        db.insert(CreateDatabase.TB_ROLE,null,cv2);
+        ContentValues cv3 = new ContentValues();
+        cv2.put(CreateDatabase.TB_ROLE_NAME,"Staff");
+        db.insert(CreateDatabase.TB_ROLE,null,cv3);
+
+        ContentValues cv1 = new ContentValues();
+        cv1.put(CreateDatabase.TB_STAFF_USERNAME,"admin");
+        cv1.put(CreateDatabase.TB_STAFF_PASSWD,"admin");
+        cv1.put(CreateDatabase.TB_STAFF_FULLNAME,"Đỗ Hoàng Hiệp");
+//        cv1.put(CreateDatabase.TB_STAFF_AVATAR,);
+        cv1.put(CreateDatabase.TB_STAFF_IDEN,"123456789");
+        cv1.put(CreateDatabase.TB_STAFF_NUMBER,"0986675691");
+        cv1.put(CreateDatabase.TB_STAFF_BIRTH,"18/01/1999");
+        cv1.put(CreateDatabase.TB_STAFF_SEX,"Nam");
+        cv1.put(CreateDatabase.TB_STAFF_ROLE_ID,1);
+        db.insert(CreateDatabase.TB_STAFF,null,cv1);
     }
 
     @Override

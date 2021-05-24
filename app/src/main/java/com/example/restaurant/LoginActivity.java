@@ -1,6 +1,7 @@
  package com.example.restaurant;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,10 +65,16 @@ import com.example.restaurant.DAO.StaffDAO;
          String username = edUsername.getText().toString();
          String passwd = edPassword.getText().toString();
          int stuffId = staffDAO.checkStuff(username, passwd);
+         int roleId = staffDAO.getRoleId(stuffId);
+         SharedPreferences sharedPreferences  = getSharedPreferences("role",MODE_PRIVATE);
+         SharedPreferences.Editor editor = sharedPreferences.edit();
+         editor.putInt("role_id",roleId);
+         editor.commit();
          if(stuffId != 0){
              Intent intentHome = new Intent(this, HomeActivity.class );
              intentHome.putExtra("username", edUsername.getText().toString());
              intentHome.putExtra("staff_id", stuffId);
+
              startActivity(intentHome);
          }else
              Toast.makeText(this, R.string.failed, Toast.LENGTH_SHORT).show();

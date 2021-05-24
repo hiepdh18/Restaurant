@@ -1,5 +1,6 @@
 package com.example.restaurant;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -63,15 +64,18 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 } else {
                     StaffDTO staffDTO = new StaffDTO(strUsername,strPasswd,strSex,strDateOfBirth,strIdentification);
                     long check = staffDAO.addStuff(staffDTO);
-                    if(check != 0 ){
+                    if(check != 0){
                         Intent iLogin  = new Intent(this,LoginActivity.class);
-                        startActivity(iLogin);
+                        setResult(Activity.RESULT_OK);
+                        finish();
+//                        startActivity(iLogin);
                     }else {
                         Toast.makeText(this, R.string.failed, Toast.LENGTH_SHORT).show();
                     }
                 }
+
                 break;
-            case R.id.btn_cancel_regist:l:
+            case R.id.btn_cancel_regist:
                 finish();
                 break;
         }

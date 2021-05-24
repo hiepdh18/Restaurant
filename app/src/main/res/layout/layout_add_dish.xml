@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="match_parent" android:layout_width="match_parent"
+<LinearLayout
+    android:padding="@dimen/size15dp"
+    android:layout_height="match_parent" android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
     <TextView
@@ -19,12 +21,14 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_margin="10dp"
             android:gravity="center"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <EditText
+                android:singleLine="true"
                 android:id="@+id/ed_dish_name"
                 android:hint="@string/dish_name"
                 android:layout_width="match_parent"
@@ -32,6 +36,7 @@
 
             </EditText>
             <EditText
+                android:singleLine="true"
                 android:id="@+id/ed_price"
                 android:hint="@string/price"
                 android:inputType="number"
@@ -48,6 +53,7 @@
                 android:id="@+id/img_dish"
                 android:src="@drawable/defaultimg"
                 android:layout_width="match_parent"
+                android:scaleType="centerCrop"
                 android:layout_height="match_parent">
             </ImageView>
 
@@ -64,6 +70,7 @@
             android:layout_height="match_parent">
         </Spinner>
         <ImageView
+            android:padding="7dp"
             android:id="@+id/img_add_cat"
             android:src="@drawable/plus"
             android:layout_width="50dp"
@@ -77,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
+            android:layout_margin="5dp"
             android:id="@+id/btn_ok_add_dish"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -84,6 +92,8 @@
             android:layout_height="wrap_content">
         </Button>
         <Button
+            android:layout_margin="5dp"
+
             android:id="@+id/btn_cancel_add_dish"
             android:layout_weight="1"
             android:layout_width="match_parent"

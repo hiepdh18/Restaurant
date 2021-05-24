@@ -27,7 +27,7 @@
     <string name="add_dish">Thêm món ăn</string>
     <string name="desk_name">Tên bàn </string>
     <string name="confirm">Đồng ý</string>
-    <string name="dish_name">Tên món ăn</string>
+    <string name="dish_name">Tên món</string>
     <string name="price">Giá tiền</string>
     <string name="cat_name">Tên loại</string>
     <string name="empty_warning">Không đước bỏ trống</string>
@@ -36,6 +36,9 @@
     <string name="add_staff">Thêm nhân viên</string>
     <string name="staff_info">Thông tin nhân viên</string>
     <string name="hint_fullname">Tên đầy đủ</string>
+    <string name="category">Loại</string>
+
+
 
 
 

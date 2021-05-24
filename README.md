@@ -32,9 +32,30 @@
         - iden
         - number
         - avatar
+        - role id
     * Desk
+        - id
+        - name
+        - status
     * Dish
+        - id
+        - name
+        - cat
+        - price
+        - img
     * Category
+        - id
+        - name
     * Order
+        - id
+        - desk
+        - staff
+        - status
+        - date
     * OrderDetail
-    * Invoice
+        - order
+        - dish
+        - amount
+    * Role
+        - id
+        - name

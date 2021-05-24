@@ -1,6 +1,7 @@
 package com.example.restaurant.FragmentApp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ public class DisplayMenuFragment extends Fragment {
     private List<CategoryDTO> listCategory;
     private FragmentManager fragmentManager;
     private int deskId;
+    private int roleId;
 
 
     @Nullable
@@ -42,6 +44,8 @@ public class DisplayMenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable  Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_display_catgory,container, false);
         setHasOptionsMenu(true);
+        roleId = getActivity().getSharedPreferences("role", Context.MODE_PRIVATE).getInt("role_id",0);
+        ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Thực đơn");
         categoryDAO = new CategoryDAO(getActivity());
         gridView = view.findViewById(R.id.gv_display_category);
         fragmentManager = getActivity().getSupportFragmentManager();
@@ -60,9 +64,11 @@ public class DisplayMenuFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull  Menu menu, @NonNull  MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem itemAddDish = menu.add(1,R.id.item_add_dish,1,R.string.add_dish);
-        itemAddDish.setIcon(R.drawable.menu);
-        itemAddDish.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        if(roleId ==1){
+            MenuItem itemAddDish = menu.add(1,R.id.item_add_dish,1,R.string.add_dish);
+            itemAddDish.setIcon(R.drawable.menu);
+            itemAddDish.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
     }
 
     @Override

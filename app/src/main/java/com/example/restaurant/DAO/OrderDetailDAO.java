@@ -40,6 +40,12 @@ public class OrderDetailDAO {
         }
         return amount;
     }
+    public int getSales(String from, String to){
+        int sales =0;
+        String q = "select * from chitiet where ";
+
+        return sales;
+    }
     public  boolean updateAmount(OrderDetailDTO orderDetail){
         ContentValues contentValues = new ContentValues();
         contentValues.put(CreateDatabase.TB_ORDER_DETAIL_AMOUNT,orderDetail.getAmount());

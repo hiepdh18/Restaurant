@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.restaurant.FragmentApp.DisplayAnalysFragment;
 import com.example.restaurant.FragmentApp.DisplayStaffFragment;
 import com.example.restaurant.FragmentApp.DisplayDeskFragment;
 import com.example.restaurant.FragmentApp.DisplayMenuFragment;
@@ -98,6 +99,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawers();
                 break;
             case R.id.item_analystics:
+
+                FragmentTransaction transt = fragmentManager.beginTransaction();
+                DisplayAnalysFragment displayAnalysFragment = new DisplayAnalysFragment();
+                transt.replace(R.id.content, displayAnalysFragment);
+                transt.commit();
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
                 break;
             case R.id.item_logout:
                 finish();

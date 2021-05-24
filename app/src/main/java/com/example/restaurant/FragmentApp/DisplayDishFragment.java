@@ -1,5 +1,6 @@
 package com.example.restaurant.FragmentApp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -18,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.restaurant.Adapter.AdapterDisplayDish;
 import com.example.restaurant.DAO.DishDAO;
 import com.example.restaurant.DTO.DishDTO;
+import com.example.restaurant.HomeActivity;
 import com.example.restaurant.PutAmountActivity;
 import com.example.restaurant.R;
 
@@ -30,6 +32,7 @@ public class DisplayDishFragment extends Fragment {
     private List<DishDTO> listDish;
     private int catId;
     private int deskId;
+    private int roleId;
     @Nullable
 
     @Override
@@ -38,7 +41,8 @@ public class DisplayDishFragment extends Fragment {
         gridView = view.findViewById(R.id.gv_display_dish);
         textView = view.findViewById(R.id.txt_cat_title);
 
-
+        roleId = getActivity().getSharedPreferences("role", Context.MODE_PRIVATE).getInt("role_id",0);
+        ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Thực đơn");
         dishDAO = new DishDAO(getActivity());
 
         Bundle  bundle = getArguments();

@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
 
         <activity android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -29,7 +30,8 @@
             android:name=".HomeActivity">
         </activity>
         <activity
-            android:theme="@style/PopUpTheme"
+
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
             android:name=".AddDeskActivity">
 
         </activity>

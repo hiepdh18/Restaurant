@@ -60,7 +60,7 @@ public class AdapterDisplayMenu extends BaseAdapter {
         String img = categoryDAO.getImgById(category.getId());
         if(!img.equals(""))
             viewHolder.img_cat.setImageURI(Uri.parse(img));
-        viewHolder.txtCatName.setText(category.getName());
+        viewHolder.txtCatName.setText(context.getResources().getString(R.string.cat_name)  + " : "+category.getName());
         return convertView;
 
     }

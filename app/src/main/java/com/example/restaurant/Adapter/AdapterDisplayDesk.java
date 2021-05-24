@@ -33,7 +33,6 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
     private Context context;
     private int layout;
     private List<DeskDTO> listDesk;
-
     private DeskDAO deskDAO;
     private ViewHolder viewHolder;
     private FragmentManager fragmentManager;
@@ -69,10 +68,7 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
             viewHolder.imgDesk = convertView.findViewById(R.id.img_desk);
             viewHolder.imgOrder = convertView.findViewById(R.id.img_order);
             viewHolder.imgPay = convertView.findViewById(R.id.img_pay);
-            viewHolder.imgRemove = convertView.findViewById(R.id.img_remove);
             convertView.setTag(viewHolder);
-
-
         }
         else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -83,9 +79,7 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
             hideButton();
         }
 
-
         DeskDTO desk = listDesk.get(position);
-
         String status = deskDAO.getStatusById(desk.getId());
         if( status.equals("true")){
             viewHolder.imgDesk.setImageResource(R.drawable.banantrue);
@@ -94,27 +88,25 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
         }
         viewHolder.txtDeskName.setText(desk.getName());
         viewHolder.imgDesk.setTag(position);
-
         viewHolder.imgDesk.setOnClickListener(this);
-        viewHolder.imgOrder.setOnClickListener(this);
         viewHolder.imgPay.setOnClickListener(this);
-        viewHolder.imgRemove.setOnClickListener(this);
-
+        viewHolder.imgOrder.setOnClickListener(this);
         return convertView;
     }
 
     @Override
     public void onClick(View view) {
         viewHolder = (ViewHolder) ((View)view.getParent()).getTag();
-        int pos1 = (int)viewHolder.imgDesk.getTag();
-        int deskId = listDesk.get(pos1).getId();
-        int id = view.getId();
-        switch (id) {
+        int pos = (int)viewHolder.imgDesk.getTag();
+        int deskId = listDesk.get(pos).getId();
+        switch (view.getId()) {
             case R.id.img_desk:
-                int pos =(int) view.getTag();
-                listDesk.get(pos).setSelected(true);
+                Toast.makeText(context, ""+R.id.img_desk+" ", Toast.LENGTH_SHORT).show();
+//                int pos =(int) view.getTag();
+                listDesk.get(pos).setSelected(true); ///??
                 loadButton();
                 break;
+
             case R.id.img_order:
                 HomeActivity activity = (HomeActivity)context;
                 Intent intentHome = activity.getIntent();
@@ -151,25 +143,21 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
                     Toast.makeText(context, "Bàn chưa gọi món!", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.img_remove:
-                break;
         }
     }
     private void loadButton(){
         viewHolder.imgOrder.setVisibility(View.VISIBLE);
         viewHolder.imgPay.setVisibility(View.VISIBLE);
-        viewHolder.imgRemove.setVisibility(View.VISIBLE);
     }
     private void hideButton(){
         viewHolder.imgOrder.setVisibility(View.INVISIBLE);
         viewHolder.imgPay.setVisibility(View.INVISIBLE);
-        viewHolder.imgRemove.setVisibility(View.INVISIBLE);
     }
 
 
     public class ViewHolder {
         TextView txtDeskName;
-        ImageView imgDesk,imgOrder, imgPay, imgRemove;
+        ImageView imgDesk,imgOrder, imgPay;
     }
 
 

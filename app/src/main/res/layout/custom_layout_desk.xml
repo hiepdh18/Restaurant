@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    android:padding="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:id="@+id/txt_desk_name"
+        android:gravity="center"
         android:textSize="@dimen/size20sp"
         android:textStyle="bold"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </TextView>
     <ImageView
         android:layout_centerHorizontal="true"
@@ -20,7 +21,7 @@
 
     </ImageView>
     <ImageView
-
+        android:layout_marginRight="@dimen/size15dp"
         android:layout_below="@+id/img_desk"
         android:id="@+id/img_order"
         android:src="@drawable/order"
@@ -29,22 +30,11 @@
 
     </ImageView>
     <ImageView
-
-        android:layout_marginLeft="7dp"
+        android:layout_marginLeft="@dimen/size15dp"
         android:layout_toRightOf="@+id/img_order"
         android:layout_below="@+id/img_desk"
         android:id="@+id/img_pay"
         android:src="@drawable/pay"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content">
-
-    </ImageView>
-    <ImageView
-        android:layout_marginLeft="7dp"
-        android:layout_toRightOf="@+id/img_pay"
-        android:layout_below="@+id/img_desk"
-        android:id="@+id/img_remove"
-        android:src="@drawable/remove"
         android:layout_width="35dp"
         android:layout_height="wrap_content">
 

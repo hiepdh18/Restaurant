@@ -14,7 +14,7 @@
     <GridView
         android:id="@+id/gv_display_dish"
         android:layout_width="match_parent"
-        android:numColumns="3"
+        android:numColumns="2"
         android:layout_height="match_parent">
     </GridView>
 </LinearLayout>
