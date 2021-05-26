@@ -55,7 +55,7 @@ public class AdapterDisplayStaff  extends BaseAdapter {
             viewHolder.avatar = view.findViewById(R.id.avatar_custom);
             viewHolder.txtName = view.findViewById(R.id.staff_name_custome);
             viewHolder.txtNumber = view.findViewById(R.id.sdt_custom);
-            viewHolder.txtSex = view.findViewById(R.id.sex_custom);
+            viewHolder.txtUsername = view.findViewById(R.id.username);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -64,7 +64,7 @@ public class AdapterDisplayStaff  extends BaseAdapter {
         if(staff.getAvatar()!=null) viewHolder.avatar.setImageURI(Uri.parse(staff.getAvatar()));
         viewHolder.txtName.setText(staff.getFullName());
         viewHolder.txtNumber.setText(staff.getNumber());
-        viewHolder.txtSex.setText(staff.getSex());
+        viewHolder.txtUsername.setText(staff.getUsername());
 
         return view;
     }
@@ -72,7 +72,7 @@ public class AdapterDisplayStaff  extends BaseAdapter {
         ImageView avatar;
         TextView txtName;
         TextView txtNumber;
-        TextView txtSex;
+        TextView txtUsername;
 
     }
 }

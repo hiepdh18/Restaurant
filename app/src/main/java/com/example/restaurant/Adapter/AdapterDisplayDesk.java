@@ -101,7 +101,7 @@ public class AdapterDisplayDesk  extends BaseAdapter implements View.OnClickList
         int deskId = listDesk.get(pos).getId();
         switch (view.getId()) {
             case R.id.img_desk:
-                Toast.makeText(context, ""+R.id.img_desk+" ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, ""+R.id.img_desk+" ", Toast.LENGTH_SHORT).show();
 //                int pos =(int) view.getTag();
                 listDesk.get(pos).setSelected(true); ///??
                 loadButton();
