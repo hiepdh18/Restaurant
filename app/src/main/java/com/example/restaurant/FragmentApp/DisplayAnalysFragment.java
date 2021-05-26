@@ -13,9 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.restaurant.DAO.OrderDetailDAO;
+import com.example.restaurant.DTO.DishPayDTO;
 import com.example.restaurant.DTO.OrderDetailDTO;
 import com.example.restaurant.HomeActivity;
 import com.example.restaurant.R;
+
+import java.util.List;
 
 
 public class DisplayAnalysFragment extends Fragment {
@@ -47,8 +50,14 @@ public class DisplayAnalysFragment extends Fragment {
                 if(from== null || to ==null ||from.equals("")||to.equals("")){
 
                 }else {
-                    int dt = orderDetailDAO.getSales(from, to);
+//                    int dt = orderDetailDAO.getSales(from, to);
                     txtDes.setText("Doanh thu từ "+from+ " đến " + to);
+
+                    List<DishPayDTO> l = orderDetailDAO.getListDishPayByDate(from, to);
+                    int dt=0;
+                    for(int i=0; i<l.size(); i++){
+                        dt += l.get(i).getAmount()*l.get(i).getPrice();
+                    }
                     txtDoanhThu.setText(String.valueOf(dt));
                 }
             }

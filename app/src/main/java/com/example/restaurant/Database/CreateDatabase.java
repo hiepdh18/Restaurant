@@ -125,7 +125,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
 //        cv1.put(CreateDatabase.TB_STAFF_AVATAR,);
         cv1.put(CreateDatabase.TB_STAFF_IDEN,"123456789");
         cv1.put(CreateDatabase.TB_STAFF_NUMBER,"0986675691");
-        cv1.put(CreateDatabase.TB_STAFF_BIRTH,"18/01/1999");
+        cv1.put(CreateDatabase.TB_STAFF_BIRTH,"18-01-1999");
         cv1.put(CreateDatabase.TB_STAFF_SEX,"Nam");
         cv1.put(CreateDatabase.TB_STAFF_ROLE_ID,1);
         db.insert(CreateDatabase.TB_STAFF,null,cv1);

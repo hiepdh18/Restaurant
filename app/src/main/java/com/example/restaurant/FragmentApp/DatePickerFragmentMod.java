@@ -29,7 +29,7 @@ public class DatePickerFragmentMod extends DialogFragment implements DatePickerD
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         EditText dateEdit = getActivity().findViewById(R.id.date_staff_modify);
-        String dateStr = ""+dayOfMonth+"/"+(month+1)+"/"+year;
+        String dateStr = ""+dayOfMonth+"-"+(month+1)+"-"+year;
         dateEdit.setText(dateStr);
     }
 }

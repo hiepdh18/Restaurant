@@ -75,6 +75,7 @@ public class DishDAO {
             dish.setId(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_DISH_ID)));
             dish.setName(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_DISH_NAME)));
             dish.setCategory(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_DISH_CAT)));
+            dish.setPrice(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_DISH_PRICE)));
             dish.setImageUrl(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_DISH_IMG)));
             cursor.moveToNext();
         }

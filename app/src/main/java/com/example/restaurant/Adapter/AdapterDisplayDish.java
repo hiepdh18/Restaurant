@@ -56,7 +56,11 @@ public class AdapterDisplayDish extends BaseAdapter {
             viewHolder =(ViewHolder) view.getTag();
         }
         DishDTO dish = listDish.get(i);
-        viewHolder.imgDish.setImageURI(Uri.parse(dish.getImageUrl()));
+//        Toast.makeText(context, dish.getImageUrl(), Toast.LENGTH_SHORT).show();
+//
+        if(dish.getImageUrl() != null){
+            viewHolder.imgDish.setImageURI(Uri.parse(dish.getImageUrl()));
+        }
         viewHolder.txtDishName.setText(context.getResources().getString(R.string.dish_name)+" : "+dish.getName());
         viewHolder.txtDishPrice.setText(context.getResources().getString(R.string.price)+" : "+dish.getPrice());
 

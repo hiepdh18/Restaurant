@@ -83,4 +83,23 @@ public class OrderDetailDAO {
         }
         return list;
     }
+    public List<DishPayDTO> getListDishPayByDate(String f, String t){
+        List<DishPayDTO> list = new ArrayList<DishPayDTO>();
+        String query = "SELECT * FROM "+CreateDatabase.TB_ORDER_DETAIL+" dt, "
+                + CreateDatabase.TB_DISH+" d, "+ CreateDatabase.TB_ORDER +" o WHERE dt."+CreateDatabase.TB_ORDER_DETAIL_DISH
+                + " = d."+CreateDatabase.TB_DISH_ID+" AND o."+ CreateDatabase.TB_ORDER_DATE
+                + " BETWEEN '"+f+"' AND '"+t+"' AND o."+CreateDatabase.TB_ORDER_ID+" = "
+                + "dt."+CreateDatabase.TB_ORDER_DETAIL_ORDER;
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            DishPayDTO dish = new DishPayDTO();
+            dish.setName(cursor.getString(cursor.getColumnIndex(CreateDatabase.TB_DISH_NAME)));
+            dish.setAmount(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_ORDER_DETAIL_AMOUNT)));
+            dish.setPrice(cursor.getInt(cursor.getColumnIndex(CreateDatabase.TB_DISH_PRICE)));
+            list.add(dish);
+            cursor.moveToNext();
+        }
+        return list;
+    }
 }

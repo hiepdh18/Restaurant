@@ -69,6 +69,9 @@ public class DisplayDishFragment extends Fragment {
 
     private void loadDish(){
         listDish = dishDAO.getDishByCat(catId);
+        listDish.forEach( dishDTO -> {
+            System.out.println(dishDTO.getImageUrl()+"\n");
+        });
         AdapterDisplayDish adapterDisplayDish = new AdapterDisplayDish(getActivity(), R.layout.custom_layout_dish, listDish);
         gridView.setAdapter(adapterDisplayDish);
         adapterDisplayDish.notifyDataSetChanged();
